@@ -1,0 +1,76 @@
+[user]
+	email = peter.stensmyr@gmail.com
+	name = Peter Stensmyr
+[alias]
+	st = status --short --branch
+	br = checkout --track origin/master -b
+	last = log -5 --pretty=format:'%C(yellow)%ad%Creset %C(green)%h%Creset | %C(bold blue) %an%Creset: %s' --date=short
+	dc = diff --cached
+	aa = add --all
+	unco = reset --soft HEAD~1
+	going = !git add --all && git commit --amend --no-edit
+
+	# open file by name
+	op = "!f() { $(git editor) $(git ls-files | grep -i \"$@\"); }; f"
+
+	# open currently edited (unstaged) files
+	eop = "! $(git editor) $(git ls-files --modified)"
+
+	# open files for conflicts (good for rebase/cherry-pick/merge)
+	mop = "!f() { $(git editor) $(git diff --name-only --diff-filter=U); }; f"
+
+	# open files present in diff
+	dop = "!f() { $(git editor) $(git diff --name-only $@); }; f"
+
+	# grep and open files containing
+	gop = "!f(){ $(git editor) $(git grep --name-only \"$@\"); }; f"
+
+	# "show and open" commit
+	shop = "!f() { $(git editor) $(git show --pretty=\"format:\" --name-only $1); }; f"
+
+	# fuzzy open by name, takes no argument
+	zop = "!f() { \
+	  local file=$(git ls-files $(git rev-parse --show-toplevel) | fzf -m); \
+	  if [[ -z $file ]]; then return 1; fi; \
+	  $(git editor) $file; \
+	}; f"
+
+	# fuzzy grep (does only one file), takes no argument
+	zgop = "!f() { \
+	  local raw_selection=$(git grep -n '.*' | fzf); \
+	  if [[ -z $raw_selection ]]; then return 1; fi; \
+	  local selection=${raw_selection%:*}; \
+	  local file=${selection%:*}; \
+	  local line=${selection##*:}; \
+	  $(git editor) +\"$line\" \"$file\"; \
+	}; f"
+
+	editor = config --get core.editor
+[core]
+	editor = nvim
+	pager = diff-so-fancy | less --tabs=4 -RFX
+	excludesfile = ~/.gitignore
+[push]
+	default = current
+[color]
+	ui = true
+[color "diff-highlight"]
+	oldNormal = red bold
+	oldHighlight = red bold 52
+	newNormal = green bold
+	newHighlight = green bold 22
+[color "diff"]
+	meta = yellow
+	frag = magenta bold
+	commit = yellow bold
+	old = red bold
+	new = green bold
+	whitespace = red reverse
+[cola]
+	spellcheck = false
+[advice]
+	detachedHead = false
+[merge]
+	renamelimit = 10000
+[blame]
+    date = short
