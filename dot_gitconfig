@@ -48,7 +48,7 @@
 	editor = config --get core.editor
 [core]
 	editor = nvim
-	pager = diff-so-fancy | less --tabs=4 -RFX
+	pager = delta
 	excludesfile = ~/.gitignore
 [push]
 	default = current
@@ -74,3 +74,11 @@
 	renamelimit = 10000
 [blame]
     date = short
+[delta]
+    plus-color = "#012800"
+    minus-color = "#340001"
+    syntax-theme = Monokai Extended
+[interactive]
+    diffFilter = delta --color-only
+[url "git@github.com:"]
+	insteadOf = https://github.com/
