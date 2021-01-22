@@ -1,7 +1,11 @@
 [user]
-	email = peter.stensmyr@iress.com
  	name = Peter Stensmyr
+{{- if eq .chezmoi.hostname "AU02-PSTENS-NB1" }}
+	email = peter.stensmyr@iress.com
 	signingkey = 2F7B3E6A3DC5A97F
+{{- else }}
+	email = peter.stensmyr@gmail.com
+{{- end }}
 [alias]
 	st = status --short --branch
 	br = checkout --track origin/master -b
@@ -53,8 +57,10 @@
 	excludesfile = ~/.gitignore
 [push]
 	default = current
+{{- if eq .chezmoi.hostname "AU02-PSTENS-NB1" }}
 [commit]
 	gpgsign = true
+{{- end }}
 [color]
 	ui = true
 [color "diff-highlight"]
