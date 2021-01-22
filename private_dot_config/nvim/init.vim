@@ -46,6 +46,7 @@ set nowrap
 set fileformat=unix
 set hidden
 set autowrite
+set ignorecase smartcase
 
 "use typeahead for the completion menu
 set completeopt=menu,noinsert
@@ -67,9 +68,7 @@ set cmdheight=2
 set autoread
 
 " theme
-if (has("termguicolors"))
- set termguicolors
-endif
+set termguicolors
 syntax enable
 colorscheme iceberg
 
@@ -104,9 +103,6 @@ inoremap <silent><expr> <Tab>
 " path to your python 
 let g:python3_host_prog = '/usr/bin/python3'
 let g:python_host_prog = '/usr/bin/python2'
-
-" deoplete
-let g:deoplete#enable_at_startup = 1
 
 " fzf
 nnoremap <C-p> :FZF<CR>
@@ -148,6 +144,8 @@ vnoremap <C-c> "*y
 lua << EOF 
 require'lspconfig'.gopls.setup{}
 EOF 
+
+autocmd Filetype go setlocal omnifunc=v:lua.vim.lsp.omnifunc
 
 let g:go_def_mode='gopls'
 let g:go_info_mode='gopls'
