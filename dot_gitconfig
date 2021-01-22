@@ -1,6 +1,7 @@
 [user]
-	email = peter.stensmyr@gmail.com
-	name = Peter Stensmyr
+	email = peter.stensmyr@iress.com
+ 	name = Peter Stensmyr
+	signingkey = 2F7B3E6A3DC5A97F
 [alias]
 	st = status --short --branch
 	br = checkout --track origin/master -b
@@ -52,6 +53,8 @@
 	excludesfile = ~/.gitignore
 [push]
 	default = current
+[commit]
+	gpgsign = true
 [color]
 	ui = true
 [color "diff-highlight"]
