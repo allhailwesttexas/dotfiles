@@ -30,6 +30,7 @@ Plug 'honza/vim-snippets'
 Plug 'preservim/nerdtree'
 Plug 'terryma/vim-expand-region'
 Plug 'tomtom/tcomment_vim'
+Plug 'neomake/neomake'
 
 call plug#end()
 
@@ -205,3 +206,7 @@ nnoremap <leader>a :cclose<CR>
 
 " Vim-airline integration
 "let g:airline#extensions#ale#enabled = 1
+
+" neomake
+call neomake#configure#automake('nrw', 50)
+let g:neomake_python_enabled_makers = ['pylint']
