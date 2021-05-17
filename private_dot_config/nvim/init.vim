@@ -147,6 +147,7 @@ require'lspconfig'.gopls.setup{}
 EOF 
 
 autocmd Filetype go setlocal omnifunc=v:lua.vim.lsp.omnifunc
+autocmd Filetype python setlocal omnifunc=v:lua.vim.lsp.omnifunc
 
 let g:go_def_mode='gopls'
 let g:go_info_mode='gopls'
@@ -210,3 +211,9 @@ nnoremap <leader>a :cclose<CR>
 " neomake
 call neomake#configure#automake('nrw', 50)
 let g:neomake_python_enabled_makers = ['pylint']
+
+" pyls
+lua << EOF
+require'lspconfig'.pyls.setup{}
+EOF
+
